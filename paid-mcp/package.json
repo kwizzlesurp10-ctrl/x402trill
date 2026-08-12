@@ -1,0 +1,45 @@
+{
+  "name": "@aetherweb/paid-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "x402-paid MCP gateway — cost-aware inference routing tool with facilitator settlement and receipts",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "aetherweb-paid-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "start:stdio": "node dist/stdio.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo:client": "node scripts/demo-client.mjs",
+    "demo:mcp": "node scripts/mcp-paid-call.mjs",
+    "live:client": "node scripts/live-client.mjs",
+    "smoke": "node scripts/demo-client.mjs && node scripts/live-client.mjs route_inference && node scripts/live-client.mjs clean_data_feed --topic agent_commerce && node scripts/mcp-paid-call.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@x402/core": "^2.22.0",
+    "@x402/evm": "^2.22.0",
+    "@x402/express": "^2.22.0",
+    "@x402/mcp": "^2.22.0",
+    "express": "^5.1.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

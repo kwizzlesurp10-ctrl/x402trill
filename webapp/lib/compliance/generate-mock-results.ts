@@ -6,10 +6,9 @@ function clampScore(n: number): number {
 }
 
 export function generateMockResults(input: ComplianceInput): ComplianceResult {
-  const { industry, employeeCount, annualRevenue, hasEmployeesInMN } = input;
+  const { industry, employeeCount } = input;
   let baseScore = 82;
   let items: { requirement: string; passed: boolean }[] = [];
-  let cost = 1840;
   let actions: string[] = [];
 
   if (industry.toLowerCase().includes('food') || industry.toLowerCase().includes('restaurant')) {
@@ -19,7 +18,7 @@ export function generateMockResults(input: ComplianceInput): ComplianceResult {
       { requirement: "Workers' Compensation Insurance", passed: employeeCount > 0 },
       { requirement: "Sales Tax Permit", passed: true },
     ];
-    cost = 2840;
+
     actions = ["Renew health permit", "Check workers comp requirements"];
   } else {
     items = [

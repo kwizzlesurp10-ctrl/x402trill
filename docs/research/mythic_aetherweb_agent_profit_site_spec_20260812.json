@@ -1,0 +1,28 @@
+{
+  "researchId": "mythic_aetherweb_agent_profit_site_spec_20260812",
+  "mythicScore": 96,
+  "summary": "The #1 job of the site is a mythic-tier public research oracle that converts the concentrated-profit thesis into an immediately actionable, filterable resource map for indie multi-agent architects.",
+  "primaryJob": "Convert agent-commerce profit-layer research into a single-file, FOSS-first, filterable research landing page.",
+  "primaryVisitor": "Solo or small-team agent systems builder who needs high-signal FOSS rails right now.",
+  "coreSections": [
+    "hero thesis",
+    "scored resource cards",
+    "contradiction resolution",
+    "skill forge",
+    "strategic path",
+    "single decisive CTA",
+    "early-access waitlist",
+    "x402 skill-pack paywall"
+  ],
+  "aesthetic": "Cinematic dark minimal with subtle neon agent-matrix accents",
+  "tone": "Hybrid mythic-prophetic + operator-precise",
+  "conversion": "Star power-law repos + waitlist early access + 0.05 USDC skill pack unlock",
+  "hardConstraints": [
+    "pure single HTML file",
+    "dark-mode default",
+    "fully accessible",
+    "zero external runtime dependencies beyond optional CDNs and optional live x402 volume/pay endpoints"
+  ],
+  "artifactPath": "aetherweb/index.html",
+  "openSourceCompliance": "100% FOSS. Tailwind CSS (MIT), pure HTML/JS, x402, agentgateway, SwarmFeed, Nostr libraries only."
+}

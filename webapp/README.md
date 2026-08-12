@@ -13,7 +13,7 @@ This directory is the **Next.js app** inside a repo whose root is one level up (
 
 ## Local development
 
-If your shell is already in **`mn-compliance-webapp/`**:
+If your shell is already in **`webapp/`**:
 
 ```bash
 npm install
@@ -23,7 +23,7 @@ npm run dev
 From the **repository root** (parent of this folder):
 
 ```bash
-cd mn-compliance-webapp && npm install && npm run dev
+cd webapp && npm install && npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Add `?init=1` to auto-run a demo check in the client (same idea as the static HTML’s init flag).
@@ -40,13 +40,13 @@ Open [http://localhost:3000](http://localhost:3000). Add `?init=1` to auto-run a
 
 ## Deploy on Vercel (from GitHub)
 
-1. **Create a new empty repository** and push the **whole repo** (root contains `mn-compliance-webapp/` and optionally other files). See the [root README](../README.md).
+1. **Create a new empty repository** and push the **whole repo** (root contains `webapp/` and optionally other files). See the [root README](../README.md).
 
-2. In [Vercel](https://vercel.com) → **Import** the repository, then set **Root Directory** to **`mn-compliance-webapp`**. Use defaults for Next.js (install + build in that directory).
+2. In [Vercel](https://vercel.com) → **Import** the repository, then set **Root Directory** to **`webapp`**. Use defaults for Next.js (install + build in that directory).
 
 3. **Environment variable (optional):** in the Vercel project, set `NEXT_PUBLIC_SITE_URL` to your production URL. See `.env.example`.
 
-4. CI at the repo root runs `npm run lint` / `test` / `build` in `mn-compliance-webapp` (see `../.github/workflows/ci.yml`).
+4. CI at the repo root runs `npm run lint` / `test` / `build` in `webapp` (see `../.github/workflows/ci.yml`).
 
 ## Not legal advice
 

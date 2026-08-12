@@ -1,0 +1,38 @@
+services:
+  paid-mcp:
+    build: .
+    ports:
+      - "4021:4021"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "4021"
+      PUBLIC_BASE_URL: "${PUBLIC_BASE_URL:-http://127.0.0.1:4021}"
+      DEMO_MODE: "${DEMO_MODE:-true}"
+      NETWORK: "${NETWORK:-eip155:84532}"
+      FACILITATOR_URL: "${FACILITATOR_URL:-https://x402.org/facilitator}"
+      PAY_TO: "${PAY_TO:-0x0000000000000000000000000000000000000a01}"
+      PRICE: "${PRICE:-$0.001}"
+      DEFAULT_AGENT_BUDGET_ATOMIC: "${DEFAULT_AGENT_BUDGET_ATOMIC:-100000}"
+      RECEIPTS_DIR: "/app/data/receipts"
+    volumes:
+      - paid_mcp_receipts:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4021/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # Optional static host for AETHERWEB oracle (wires to paid-mcp via ?payBase=)
+  aetherweb:
+    image: nginx:alpine
+    ports:
+      - "8765:80"
+    volumes:
+      - ../aetherweb:/usr/share/nginx/html:ro
+    depends_on:
+      - paid-mcp
+    profiles: ["oracle"]
+
+volumes:
+  paid_mcp_receipts:

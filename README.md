@@ -1,6 +1,55 @@
-# MN Compliance Webapp Monorepo
+# x402trill monorepo
 
-This repository contains a production-ready Next.js application for Minnesota small business compliance checks.
+This repository holds:
+
+1. **AETHERWEB** — single-file agent-commerce research oracle (`aetherweb/`)
+2. **MN Compliance webapp** — production Next.js app (`webapp/`)
+
+Agent operating instructions: see [`AGENTS.md`](./AGENTS.md). Research payloads: `docs/research/`.
+
+## AETHERWEB Research Oracle
+
+Static, FOSS-first landing page for the concentrated agent-profit thesis (filterable resources, contradictions, skill forge, waitlist, demo x402 skill-pack gate).
+
+```bash
+python3 -m http.server 8765 --directory aetherweb
+# open http://localhost:8765
+```
+
+Regenerate `RESEARCH` from JSON:
+
+```bash
+node aetherweb/scripts/inject-research.mjs docs/research/mythic_agent_profit_layers_20260812.json
+```
+
+## Paid MCP gateway (`paid-mcp/`)
+
+x402-paid high-utility tool: **cost-aware inference routing** (`route_inference`).
+
+```bash
+cd paid-mcp
+cp .env.example .env   # DEMO_MODE=true by default
+npm install && npm test && npm start
+# health     http://127.0.0.1:4021/health
+# discovery  http://127.0.0.1:4021/discovery
+# MCP        http://127.0.0.1:4021/mcp
+# paid HTTP  POST /v1/route-inference  (402 without payment)
+```
+
+Demo settle:
+
+```bash
+# mint demo payment, then call with PAYMENT-SIGNATURE header
+curl -s -X POST http://127.0.0.1:4021/v1/demo/mint-payment -H 'content-type: application/json' -d '{}'
+```
+
+See `paid-mcp/README.md` and skill `/x402-paid-mcp-gateway`.
+
+---
+
+# MN Compliance Webapp
+
+Production-ready Next.js application for Minnesota small business compliance checks.
 
 ## Repository Structure
 

@@ -1,71 +1,34 @@
 import { describe, expect, it } from "vitest";
-import { generateMockResults, protectionLevel } from "./generate-mock-results";
-import type { ComplianceCheckInput } from "./schema";
+import { generateMockResults } from "./generate-mock-results";
+import type { ComplianceInput } from "./types";
 
-const base: ComplianceCheckInput = {
-  businessType: "retail",
-  location: "bloomington",
-  employees: 3,
-  revenue: "50k-150k",
+const base: ComplianceInput = {
+  businessName: "Test Biz",
+  industry: "retail",
+  employeeCount: 3,
+  annualRevenue: 100000,
+  hasEmployeesInMN: true,
+  offersBenefits: false,
+  handlesPersonalData: false,
+  sellsPhysicalGoods: true,
 };
 
 describe("generateMockResults", () => {
-  it("produces retail-specific items and score band", () => {
-    const r = generateMockResults({ ...base, businessType: "retail" });
-    expect(r.items.some((i) => i.name.includes("Sales Tax"))).toBe(true);
-    expect(r.score).toBeGreaterThanOrEqual(58);
-    expect(r.score).toBeLessThanOrEqual(96);
+  it("produces results with overallScore in expected band and checklist", () => {
+    const r = generateMockResults({ ...base, industry: "retail" });
+    expect(r.overallScore).toBeGreaterThanOrEqual(58);
+    expect(r.overallScore).toBeLessThanOrEqual(96);
+    expect(r.checklist.length).toBeGreaterThan(0);
   });
 
-  it("applies stricter local adjustment for minneapolis", () => {
-    const mpls = generateMockResults({ ...base, businessType: "other", location: "minneapolis" });
-    const rural = generateMockResults({ ...base, businessType: "other", location: "greater-mn" });
-    expect(mpls.score).toBeLessThanOrEqual(rural.score);
+  it("uses food/restaurant specific checklist items for food industries", () => {
+    const r = generateMockResults({ ...base, industry: "food truck" });
+    const hasFoodHandler = r.checklist.some((i) => i.requirement.includes("Food Handler"));
+    expect(hasFoodHandler).toBe(true);
   });
 
-  it("lowers score for large employers in strict cities", () => {
-    const small = generateMockResults({
-      ...base,
-      businessType: "restaurant",
-      location: "minneapolis",
-      employees: 2,
-    });
-    const big = generateMockResults({
-      ...base,
-      businessType: "restaurant",
-      location: "minneapolis",
-      employees: 50,
-    });
-    expect(big.score).toBeLessThan(small.score);
-  });
-});
-
-describe("protectionLevel", () => {
-  it("returns 98 max", () => {
-    expect(
-      protectionLevel(96, [
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-        { status: "active" },
-      ]),
-    ).toBe(98);
+  it("returns recommendations array", () => {
+    const r = generateMockResults(base);
+    expect(Array.isArray(r.recommendations)).toBe(true);
   });
 });

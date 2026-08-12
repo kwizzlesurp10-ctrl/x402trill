@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#05060a" />
+  <meta name="description" content="AETHERWEB Research Oracle — concentrated agent-commerce profit maps for indie multi-agent architects. FOSS rails: x402, LiteLLM, agentgateway, SwarmFeed." />
+  <meta name="robots" content="index,follow" />
+  <title>AETHERWEB · Agent Profit Layers Research Oracle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            void: { DEFAULT: '#05060a', 50: '#0b0d14', 100: '#10131c', 200: '#161a26' },
+            neon: {
+              cyan: '#22d3ee',
+              violet: '#a78bfa',
+              lime: '#a3e635',
+              rose: '#fb7185',
+              amber: '#fbbf24'
+            }
+          },
+          fontFamily: {
+            sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+            display: ['"Syne"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            neon: '0 0 0 1px rgba(34,211,238,0.15), 0 0 40px -12px rgba(34,211,238,0.45)',
+            glass: '0 8px 32px rgba(0,0,0,0.45)'
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'grid-drift': 'gridDrift 28s linear infinite'
+          },
+          keyframes: {
+            gridDrift: {
+              '0%': { backgroundPosition: '0 0' },
+              '100%': { backgroundPosition: '80px 80px' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --fg: #e8edf7;
+      --muted: #94a3b8;
+      --accent: #22d3ee;
+      --accent-2: #a78bfa;
+      --border: rgba(148, 163, 184, 0.14);
+      --glass: rgba(16, 19, 28, 0.72);
+      --focus: #22d3ee;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+    }
+    .matrix-grid {
+      background-image:
+        linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridDrift 28s linear infinite;
+    }
+    @keyframes gridDrift {
+      0% { background-position: 0 0; }
+      100% { background-position: 80px 80px; }
+    }
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glow-ring {
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.18), 0 0 48px -16px rgba(34,211,238,0.5);
+    }
+    .score-fill {
+      background: linear-gradient(90deg, #22d3ee 0%, #a78bfa 55%, #a3e635 100%);
+      transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .chip {
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .chip[aria-pressed="true"] {
+      background: rgba(34, 211, 238, 0.14);
+      border-color: rgba(34, 211, 238, 0.55);
+      color: #e0f7ff;
+      box-shadow: 0 0 20px -8px rgba(34, 211, 238, 0.7);
+    }
+    .card-enter {
+      animation: cardIn 0.45s ease both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .resource-card[hidden] { display: none !important; }
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .matrix-grid, .score-fill, .card-enter, * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-neon-cyan focus:px-4 focus:py-2 focus:text-void focus:font-semibold">
+    Skip to main content
+  </a>
+
+  <!-- Ambient field -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-0 matrix-grid opacity-70"></div>
+    <div class="absolute -top-32 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-neon-cyan/10 blur-[120px]"></div>
+    <div class="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-neon-violet/10 blur-[100px]"></div>
+    <div class="absolute top-1/3 left-0 h-64 w-64 rounded-full bg-neon-lime/5 blur-[80px]"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-void/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#top" class="group flex items-center gap-3 rounded-md" aria-label="AETHERWEB home">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg border border-neon-cyan/30 bg-void-50 font-mono text-sm font-medium text-neon-cyan shadow-neon" aria-hidden="true">Æ</span>
+        <div class="leading-tight">
+          <div class="font-display text-sm font-bold tracking-wide text-white group-hover:text-neon-cyan transition-colors">AETHERWEB</div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Research Oracle</div>
+        </div>
+      </a>
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <a class="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white" href="#thesis">Thesis</a>
+        <a class="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white" href="#resources">Resources</a>
+        <a class="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white" href="#contradictions">Signals</a>
+        <a class="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white" href="#skills">Skill Forge</a>
+        <a class="rounded-md px-3 py-1.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white" href="#path">Path</a>
+      </nav>
+      <a href="#cta"
+         class="inline-flex items-center gap-2 rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-neon-cyan hover:bg-neon-cyan/20 focus-visible:outline-offset-2">
+        Early Access
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="relative mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20" aria-labelledby="hero-title">
+      <div class="mb-6 flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center gap-2 rounded-full border border-neon-lime/30 bg-neon-lime/10 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-neon-lime">
+          <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-neon-lime" aria-hidden="true"></span>
+          Mythic Score 94 · Research Live
+        </span>
+        <span class="font-mono text-[11px] text-slate-500" id="research-meta">ID mythic_agent_profit_layers_20260812</span>
+      </div>
+
+      <p class="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-neon-violet">Concentrated profit · Open rails · High-frequency utility</p>
+
+      <h1 id="hero-title" class="font-display max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+        Real organic agent profit exists—
+        <span class="bg-gradient-to-r from-neon-cyan via-neon-violet to-neon-lime bg-clip-text text-transparent">
+          concentrated, scarce, and still small next to the hype.
+        </span>
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+        The highest-probability near-term money is in high-frequency, high-utility resources agents actually need—
+        <strong class="font-semibold text-white">inference routing</strong>,
+        <strong class="font-semibold text-white">clean data</strong>,
+        <strong class="font-semibold text-white">social feeds</strong>—
+        and the infrastructure that makes those payments
+        <strong class="font-semibold text-neon-cyan">reliable</strong> and
+        <strong class="font-semibold text-neon-cyan">discoverable</strong>.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#resources"
+           class="inline-flex items-center justify-center rounded-xl bg-neon-cyan px-5 py-3 text-sm font-semibold text-void shadow-neon hover:bg-cyan-300 focus-visible:outline-offset-2">
+          Open resource map
+        </a>
+        <a href="#cta"
+           class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">
+          Star power-law repos + skill pack
+        </a>
+      </div>
+
+      <!-- Live metrics strip -->
+      <div class="mt-12 grid gap-3 sm:grid-cols-3" role="group" aria-label="Research snapshot metrics">
+        <div class="glass glow-ring rounded-2xl p-4">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500">x402 reported (30d)</div>
+          <div class="mt-1 font-display text-2xl font-bold text-white" id="metric-txns">75M+</div>
+          <div class="mt-1 text-xs text-slate-400">txns · ~$24M headline volume</div>
+        </div>
+        <div class="glass rounded-2xl p-4">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Organic estimate (daily)</div>
+          <div class="mt-1 font-display text-2xl font-bold text-neon-amber" id="metric-organic">~$28k</div>
+          <div class="mt-1 text-xs text-slate-400">independent analysis · wash-aware</div>
+        </div>
+        <div class="glass rounded-2xl p-4">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Horizon</div>
+          <div class="mt-1 font-display text-2xl font-bold text-neon-violet">6–18 mo</div>
+          <div class="mt-1 text-xs text-slate-400">compounding window for tollbooth layers</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THESIS -->
+    <section id="thesis" class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="thesis-title">
+      <div class="glass rounded-3xl p-6 sm:p-10">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-cyan">01 · Operator thesis</p>
+            <h2 id="thesis-title" class="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">Directionally correct. Under-appreciated.</h2>
+          </div>
+          <span class="rounded-full border border-white/10 bg-void-50 px-3 py-1 font-mono text-xs text-slate-400">synthesisQuality: exceptional</span>
+        </div>
+        <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-300">
+          Real organic agent commerce volume remains concentrated and small relative to trillion-scale projections,
+          yet the highest-probability near-term capture sits precisely in high-frequency, high-utility primitives agents must call repeatedly—
+          plus the open payment and discovery rails (<span class="text-neon-cyan">x402</span> + MCP/A2A gateways) that make those calls reliable and autonomously payable.
+          FOSS infrastructure is already shipping production-grade components; the remaining edge is
+          <em class="not-italic text-white">operational reliability</em>,
+          <em class="not-italic text-white">discovery surfaces</em>, and
+          <em class="not-italic text-white">metering that survives agent-scale traffic</em> without human intervention.
+        </p>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" role="list">
+          <li class="rounded-2xl border border-white/8 bg-void-50/80 p-4">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-neon-cyan">Layer A</div>
+            <div class="mt-1 font-semibold text-white">Inference routing</div>
+            <p class="mt-1 text-sm text-slate-400">LiteLLM · agentgateway · cost-aware fallbacks</p>
+          </li>
+          <li class="rounded-2xl border border-white/8 bg-void-50/80 p-4">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-neon-violet">Layer B</div>
+            <div class="mt-1 font-semibold text-white">Clean structured data</div>
+            <p class="mt-1 text-sm text-slate-400">Paid MCPs · marketplaces · high-frequency feeds</p>
+          </li>
+          <li class="rounded-2xl border border-white/8 bg-void-50/80 p-4">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-neon-lime">Layer C</div>
+            <div class="mt-1 font-semibold text-white">Social / reputation</div>
+            <p class="mt-1 text-sm text-slate-400">SwarmFeed · Nostr · portable trust graphs</p>
+          </li>
+          <li class="rounded-2xl border border-white/8 bg-void-50/80 p-4">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-neon-rose">Layer D</div>
+            <div class="mt-1 font-semibold text-white">Payment reliability</div>
+            <p class="mt-1 text-sm text-slate-400">x402 · multi-rail · receipts · discovery</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section id="resources" class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="resources-title">
+      <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-violet">02 · Power-law FOSS map</p>
+          <h2 id="resources-title" class="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">Scored resource cards</h2>
+          <p class="mt-2 max-w-xl text-sm text-slate-400">Filter by type. Mythic potential is operator judgment for near-term capture density—not hype score.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter resources by type">
+          <span class="sr-only" id="filter-status" aria-live="polite"></span>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="protocol" aria-pressed="false">Protocol</button>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="gateway" aria-pressed="false">Gateway</button>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="payment" aria-pressed="false">Payment</button>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="social" aria-pressed="false">Social</button>
+          <button type="button" class="chip rounded-full border border-white/10 bg-void-50 px-3 py-1.5 text-xs font-medium text-slate-300" data-filter="data" aria-pressed="false">Data</button>
+        </div>
+      </div>
+
+      <div id="resource-grid" class="grid gap-4 md:grid-cols-2" role="list"></div>
+      <p id="empty-state" class="mt-6 hidden rounded-2xl border border-dashed border-white/15 p-8 text-center text-sm text-slate-400" role="status">
+        No resources match this filter.
+      </p>
+    </section>
+
+    <!-- CONTRADICTIONS -->
+    <section id="contradictions" class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="contradictions-title">
+      <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-amber">03 · Contradiction resolution</p>
+      <h2 id="contradictions-title" class="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">Hold both signals. Act on the scarce layer.</h2>
+      <div class="mt-8 grid gap-4 lg:grid-cols-2" id="contradiction-list"></div>
+    </section>
+
+    <!-- SKILL FORGE -->
+    <section id="skills" class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="skills-title">
+      <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-lime">04 · Skill forge</p>
+      <h2 id="skills-title" class="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">Myths that compound into AGENTS.md</h2>
+      <p class="mt-2 max-w-2xl text-sm text-slate-400">Extracted skills for multi-agent builders. Start thin, evolve into tollbooth infrastructure.</p>
+      <div class="mt-8 grid gap-4 lg:grid-cols-3" id="skill-grid"></div>
+    </section>
+
+    <!-- STRATEGIC PATH -->
+    <section id="path" class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="path-title">
+      <div class="glass glow-ring rounded-3xl p-6 sm:p-10">
+        <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-rose">05 · Long-term strategic value</p>
+        <h2 id="path-title" class="mt-2 font-display text-2xl font-bold text-white sm:text-3xl">Own the high-frequency surfaces.</h2>
+        <p class="mt-5 max-w-3xl text-base leading-relaxed text-slate-300">
+          For indie multi-agent architects the compounding path is clear: own or tightly integrate the high-frequency utility surfaces
+          (routing, clean data, social/reputation) and expose them behind x402/MCP with autonomous discovery and metering.
+          These layers become the <strong class="text-white">tollbooths</strong> as agent density rises.
+          Opportunity cost of chasing vertical agent products is high—most will be commoditized; the infrastructure that makes
+          payments reliable and resources discoverable captures durable, protocol-level margins over 6–18 months.
+        </p>
+        <ol class="mt-8 grid gap-3 sm:grid-cols-3" role="list">
+          <li class="rounded-2xl border border-white/10 bg-void/60 p-4">
+            <div class="font-mono text-xs text-neon-cyan">Step 01 · 0–90d</div>
+            <p class="mt-2 text-sm text-slate-300">Ship one paid MCP (inference or data) with x402 receipts and budgets.</p>
+          </li>
+          <li class="rounded-2xl border border-white/10 bg-void/60 p-4">
+            <div class="font-mono text-xs text-neon-violet">Step 02 · 3–6mo</div>
+            <p class="mt-2 text-sm text-slate-300">Multi-rail router + reputation-weighted discovery registry.</p>
+          </li>
+          <li class="rounded-2xl border border-white/10 bg-void/60 p-4">
+            <div class="font-mono text-xs text-neon-lime">Step 03 · 6–18mo</div>
+            <p class="mt-2 text-sm text-slate-300">Agent commerce marketplace layer; harvest protocol-level margins.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CTA + EARLY ACCESS + x402 GATE -->
+    <section id="cta" class="mx-auto max-w-6xl px-4 py-16 sm:px-6" aria-labelledby="cta-title">
+      <div class="relative overflow-hidden rounded-3xl border border-neon-cyan/30 bg-gradient-to-br from-void-100 via-void to-void-50 p-8 sm:p-12">
+        <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-neon-cyan/20 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-16 left-10 h-48 w-48 rounded-full bg-neon-violet/20 blur-3xl" aria-hidden="true"></div>
+        <div class="relative">
+          <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-cyan">06 · Single decisive action</p>
+          <h2 id="cta-title" class="mt-2 max-w-2xl font-display text-3xl font-bold text-white sm:text-4xl">
+            Star the power-law repos. Unlock the skill pack.
+          </h2>
+          <p class="mt-4 max-w-xl text-slate-300">
+            Conversion is operator commitment: star the FOSS rails, join the builder waitlist, then settle a micro-payment
+            (demo x402 flow) to unlock the full implementation pack—demonstrating the thesis this page argues.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a id="cta-star"
+               href="https://github.com/x402-foundation/x402"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-2 rounded-xl bg-neon-cyan px-6 py-3.5 text-sm font-bold text-void shadow-neon hover:bg-cyan-300">
+              Star x402 on GitHub
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a href="#early-access"
+               class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10">
+              Join early-access waitlist
+            </a>
+            <a href="#skill-pack"
+               class="inline-flex items-center justify-center gap-2 rounded-xl border border-neon-violet/40 bg-neon-violet/10 px-6 py-3.5 text-sm font-semibold text-neon-violet hover:bg-neon-violet/20">
+              Unlock skill pack · 0.05 USDC
+            </a>
+          </div>
+          <p class="mt-6 font-mono text-[11px] text-slate-500">
+            Also star: LiteLLM · agentgateway · SwarmFeed · OpenAgentPay · awesome-agent-services
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2" id="secondary-stars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EARLY ACCESS FORM -->
+    <section id="early-access" class="mx-auto max-w-6xl px-4 pb-12 sm:px-6" aria-labelledby="early-title">
+      <div class="glass rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-violet">07 · Builder waitlist</p>
+            <h2 id="early-title" class="mt-2 font-display text-2xl font-bold text-white">Request early access</h2>
+            <p class="mt-2 max-w-xl text-sm text-slate-400">Stored locally and exportable. Optional webhook + mailto fallback—no closed SaaS required.</p>
+          </div>
+          <span id="waitlist-count" class="font-mono text-xs text-slate-500" aria-live="polite"></span>
+        </div>
+        <form id="early-form" class="mt-6 grid gap-4 sm:grid-cols-2" novalidate>
+          <div class="sm:col-span-1">
+            <label for="ea-name" class="block font-mono text-[11px] uppercase tracking-wider text-slate-500">Name / handle</label>
+            <input id="ea-name" name="name" type="text" autocomplete="nickname" required maxlength="80"
+                   class="mt-1.5 w-full rounded-xl border border-white/10 bg-void-50 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-neon-cyan/50"
+                   placeholder="agent-architect" />
+          </div>
+          <div class="sm:col-span-1">
+            <label for="ea-email" class="block font-mono text-[11px] uppercase tracking-wider text-slate-500">Email</label>
+            <input id="ea-email" name="email" type="email" autocomplete="email" required maxlength="120"
+                   class="mt-1.5 w-full rounded-xl border border-white/10 bg-void-50 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-neon-cyan/50"
+                   placeholder="you@builders.dev" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="ea-stack" class="block font-mono text-[11px] uppercase tracking-wider text-slate-500">Stack focus</label>
+            <select id="ea-stack" name="stack"
+                    class="mt-1.5 w-full rounded-xl border border-white/10 bg-void-50 px-3 py-2.5 text-sm text-white focus:border-neon-cyan/50">
+              <option value="x402-mcp">x402 + paid MCP gateway</option>
+              <option value="inference">Inference routing / LiteLLM</option>
+              <option value="data">Clean data feeds</option>
+              <option value="social">Agent social / reputation</option>
+              <option value="full-stack">Full multi-agent commerce stack</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="ea-note" class="block font-mono text-[11px] uppercase tracking-wider text-slate-500">What are you building? <span class="normal-case tracking-normal text-slate-600">(optional)</span></label>
+            <textarea id="ea-note" name="note" rows="3" maxlength="500"
+                      class="mt-1.5 w-full resize-y rounded-xl border border-white/10 bg-void-50 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-neon-cyan/50"
+                      placeholder="Swarm of research agents that pay per clean signal…"></textarea>
+          </div>
+          <div class="sm:col-span-2 flex flex-wrap items-center gap-3">
+            <button type="submit"
+                    class="inline-flex items-center justify-center rounded-xl bg-neon-violet px-5 py-2.5 text-sm font-semibold text-void hover:bg-violet-300">
+              Join waitlist
+            </button>
+            <button type="button" id="export-waitlist"
+                    class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 hover:bg-white/10">
+              Export JSON
+            </button>
+            <button type="button" id="mailto-waitlist"
+                    class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 hover:bg-white/10">
+              Email last signup
+            </button>
+            <p id="form-status" class="text-sm text-slate-400" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- x402 PAID SKILL PACK -->
+    <section id="skill-pack" class="mx-auto max-w-6xl px-4 pb-16 sm:px-6" aria-labelledby="pack-title">
+      <div class="glass glow-ring rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-neon-rose">08 · x402-Paid-Research-Gate</p>
+            <h2 id="pack-title" class="mt-2 font-display text-2xl font-bold text-white">Skill pack unlock</h2>
+            <p class="mt-2 max-w-2xl text-sm text-slate-400">
+              Free thesis above. Full implementation guidance behind a micropayment wall that mirrors production x402 semantics
+              (HTTP 402 challenge → authorization → receipt). Demo mode settles locally; wire <code class="text-neon-cyan">CONFIG.payEndpoint</code> for live facilitator settlement.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-neon-rose/30 bg-neon-rose/10 px-4 py-3 text-right">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-neon-rose">Price</div>
+            <div class="font-display text-2xl font-bold text-white" id="pack-price">0.05 USDC</div>
+            <div class="font-mono text-[10px] text-slate-500">Base · eip155:8453</div>
+          </div>
+        </div>
+
+        <div id="pay-gate" class="mt-6 rounded-2xl border border-white/10 bg-void-50/80 p-5" aria-live="polite">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="rounded-md bg-neon-amber/20 px-2 py-0.5 font-mono text-[11px] font-semibold text-neon-amber">HTTP 402</span>
+            <span class="font-mono text-xs text-slate-400">Payment Required</span>
+            <span id="pay-status-badge" class="ml-auto rounded-full border border-white/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-slate-400">locked</span>
+          </div>
+          <pre id="payment-required" class="mt-4 overflow-x-auto rounded-xl border border-white/5 bg-void p-4 font-mono text-[11px] leading-relaxed text-slate-300" tabindex="0"></pre>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button type="button" id="btn-demo-pay"
+                    class="inline-flex items-center justify-center rounded-xl bg-neon-cyan px-5 py-2.5 text-sm font-bold text-void shadow-neon hover:bg-cyan-300">
+              Settle demo payment
+            </button>
+            <button type="button" id="btn-copy-challenge"
+                    class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 hover:bg-white/10">
+              Copy PAYMENT-REQUIRED
+            </button>
+            <button type="button" id="btn-reset-pay"
+                    class="inline-flex items-center justify-center rounded-xl border border-white/10 px-4 py-2.5 text-sm text-slate-400 hover:text-white">
+              Reset unlock
+            </button>
+          </div>
+          <p id="pay-msg" class="mt-3 text-sm text-slate-400" role="status"></p>
+        </div>
+
+        <div id="pack-content" class="mt-6 hidden" hidden>
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-display text-lg font-bold text-neon-lime">Unlocked · Implementation pack</h3>
+            <button type="button" id="btn-download-pack"
+                    class="rounded-lg border border-neon-lime/30 bg-neon-lime/10 px-3 py-1.5 font-mono text-xs font-medium text-neon-lime hover:bg-neon-lime/20">
+              Download skill-pack.md
+            </button>
+          </div>
+          <article id="pack-body" class="prose-pack space-y-4 rounded-2xl border border-neon-lime/20 bg-void/70 p-5 text-sm leading-relaxed text-slate-200"></article>
+          <div id="receipt-box" class="mt-4 rounded-xl border border-white/10 bg-void-50 p-4 font-mono text-[11px] text-slate-400"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER META -->
+    <footer class="border-t border-white/5 py-10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:flex-row sm:items-start sm:justify-between sm:px-6">
+        <div>
+          <div class="font-display text-sm font-bold text-white">AETHERWEB Research Oracle</div>
+          <p class="mt-1 max-w-md text-xs leading-relaxed text-slate-500">
+            Single-file FOSS artifact. 100% open-source primacy (MIT/Apache protocols).
+            Regenerable from ResearchForge JSON in &lt;30s. Dark-mode default · WCAG-minded · zero runtime framework.
+          </p>
+        </div>
+        <div class="font-mono text-[11px] text-slate-600 space-y-1 text-left sm:text-right">
+          <div>siteSpec · mythic_aetherweb_agent_profit_site_spec_20260812 · score 96</div>
+          <div>source · mythic_agent_profit_layers_20260812 · score 94</div>
+          <div>openSourceCompliance · 100% FOSS</div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    /**
+     * Operator config — points at paid-mcp gateway by default (local Stage-1).
+     * Override via ?payBase=http://host:port query param.
+     */
+    const CONFIG = {
+      waitlistKey: "aetherweb_waitlist_v1",
+      unlockKey: "aetherweb_skillpack_unlock_v1",
+      webhookUrl: "", // e.g. Formspree / self-hosted POST
+      contactEmail: "builders@aetherweb.local",
+      // paid-mcp dual surface (HTTP + MCP). Empty = pure local skill-pack demo.
+      payBase: new URLSearchParams(location.search).get("payBase") || "http://127.0.0.1:4021",
+      payEndpoint: "", // filled from payBase on boot
+      mintEndpoint: "", // filled from payBase on boot
+      discoveryEndpoint: "",
+      pay: {
+        scheme: "exact",
+        network: "eip155:84532",
+        asset: "USDC",
+        assetAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+        amount: "0.001",
+        amountAtomic: "1000",
+        payTo: "0x0000000000000000000000000000000000000a01",
+        resource: "http://127.0.0.1:4021/v1/route-inference",
+        description: "paid-mcp route_inference · cost-aware model routing"
+      }
+    };
+    CONFIG.payEndpoint = CONFIG.payBase.replace(/\/$/, "") + "/v1/route-inference";
+    CONFIG.mintEndpoint = CONFIG.payBase.replace(/\/$/, "") + "/v1/demo/mint-payment";
+    CONFIG.discoveryEndpoint = CONFIG.payBase.replace(/\/$/, "") + "/discovery";
+
+    /**
+     * Research payload — overwrite this object to regenerate the oracle.
+     * Schema aligned with ResearchForge / mythic research JSON.
+     */
+    const RESEARCH = {
+      "researchId": "mythic_agent_profit_layers_20260812",
+      "mythicScore": 94,
+      "siteSpecId": "mythic_agent_profit_layers_20260812",
+      "topResources": [
+        {
+          "name": "x402 Foundation / x402 protocol",
+          "url": "https://github.com/x402-foundation/x402",
+          "type": "protocol + SDKs",
+          "filter": "protocol",
+          "why": "HTTP-native 402 micropayments (USDC on Base dominant). 75M+ txns/30d reported; enables agents to pay per-request for any resource without accounts or API keys. Linux Foundation stewardship + Coinbase/Cloudflare/AWS adoption.",
+          "mythicPotential": 10
+        },
+        {
+          "name": "LiteLLM",
+          "url": "https://github.com/BerriAI/litellm",
+          "type": "inference gateway",
+          "filter": "gateway",
+          "why": "56k+ stars, MIT, OpenAI-compatible proxy across 100+ providers with budgets, fallbacks, spend tracking, load-balancing. The default self-hosted high-frequency routing layer agents actually call.",
+          "mythicPotential": 9
+        },
+        {
+          "name": "agentgateway",
+          "url": "https://github.com/agentgateway/agentgateway",
+          "type": "agentic proxy",
+          "filter": "gateway",
+          "why": "4.3k stars, MCP + A2A native, LLM routing, tool federation, observability, Kubernetes-ready. Purpose-built connectivity fabric for agent-to-LLM, agent-to-tool, agent-to-agent.",
+          "mythicPotential": 9
+        },
+        {
+          "name": "OpenAgentPay + MoltPe / agenti",
+          "url": "https://github.com/alokemajumder/OpenAgentPay",
+          "type": "payment orchestration",
+          "filter": "payment",
+          "why": "Multi-rail (x402 + MPP + fiat) middleware with smart routing, policy engine, paid MCP tools. Reference implementations for reliable settlement and receipting.",
+          "mythicPotential": 8
+        },
+        {
+          "name": "SwarmFeed + Nostr agent social layer",
+          "url": "https://github.com/swarmclawai/swarmfeed",
+          "type": "social feed / reputation",
+          "filter": "social",
+          "why": "Fully open-source agent-native social network (posts, follows, reputation, MCP/CLI). Complements Nostr-based identity + Lightning zaps for portable social graphs agents can query and pay into.",
+          "mythicPotential": 8
+        },
+        {
+          "name": "Agent-native data MCPs & marketplaces",
+          "url": "https://github.com/farol-team/awesome-agent-services",
+          "type": "clean data feeds",
+          "filter": "data",
+          "why": "Curated services + FirstData MCP, DataBazaar, OEC BotMarket, agentdata-mcp (x402 crypto feeds). High-utility structured data delivered via MCP with payment hooks.",
+          "mythicPotential": 8
+        }
+      ],
+      "contradictionsDetected": [
+        {
+          "signalA": "x402 reports 75M+ transactions / $24M volume in 30 days with major foundation members",
+          "signalB": "Independent analyses show real organic daily volume still low (~$28k estimates), heavy self-dealing/wash, and conversion rates near zero for pure data vs skills",
+          "resolution": "Transaction count is inflated by probes and internal loops; organic paid utility (inference, clean data, social) remains the scarce, high-margin layer. Focus on reliability + discoverability compounds faster than raw volume chasing."
+        },
+        {
+          "signalA": "Trillion-scale 2028-2030 agentic commerce projections (Gartner/Juniper)",
+          "signalB": "Current deployed agent-to-agent real money experiments still in low thousands of dollars per week",
+          "resolution": "Hype is infrastructure financing; near-term organic profit is concentrated in the primitives agents already call at high frequency. Build the rails now, harvest later."
+        }
+      ],
+      "skillSuggestions": [
+        {
+          "title": "x402-Paid-MCP-Gateway",
+          "rationale": "Wrap any high-utility MCP (inference, data, social feed) with x402 middleware so agents can discover, pay, and call it autonomously with receipts and budget controls.",
+          "mythicPotential": 10,
+          "evolutionPath": "Start with single paid tool → multi-rail router → reputation-weighted discovery registry → full agent commerce marketplace layer over 3-6 months.",
+          "prerequisites": [
+            "MCP server basics",
+            "x402 SDK",
+            "wallet abstraction"
+          ],
+          "exampleInvocation": "Register paid inference-router MCP; agents pay $0.001/call via USDC Base and receive structured response + receipt."
+        },
+        {
+          "title": "Agent-Social-Feed-Ingestor",
+          "rationale": "Stateful Nostr/SwarmFeed adapter that supplies clean, deduplicated, reputation-scored social signals as MCP tools agents can query or pay to post into.",
+          "mythicPotential": 9,
+          "evolutionPath": "Basic feed reader → trust-graph scoring → paid signal marketplace → cross-agent collaboration protocol.",
+          "prerequisites": [
+            "Nostr libraries",
+            "MCP",
+            "state store"
+          ],
+          "exampleInvocation": "Agent queries trending agent discussions or posts capability ads with Lightning zap incentives."
+        },
+        {
+          "title": "Inference-Routing-Meter",
+          "rationale": "LiteLLM/agentgateway extension that exposes cost-aware, fallback-enabled routing as a paid, discoverable resource with per-call accounting.",
+          "mythicPotential": 9,
+          "evolutionPath": "Internal router → public paid endpoint → multi-tenant agent gateway with SLA and reputation.",
+          "prerequisites": [
+            "LiteLLM or agentgateway",
+            "x402"
+          ],
+          "exampleInvocation": "Agent selects cheapest capable model for a sub-task and settles instantly."
+        }
+      ]
+    };
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function scoreBar(score, max = 10) {
+      const pct = Math.max(0, Math.min(100, (score / max) * 100));
+      return `
+        <div class="mt-4">
+          <div class="mb-1.5 flex items-center justify-between text-[11px]">
+            <span class="font-mono uppercase tracking-wider text-slate-500">Mythic potential</span>
+            <span class="font-mono font-medium text-neon-cyan">${score}/${max}</span>
+          </div>
+          <div class="h-1.5 overflow-hidden rounded-full bg-white/10" role="meter" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="${max}" aria-label="Mythic potential ${score} of ${max}">
+            <div class="score-fill h-full rounded-full" style="width:${pct}%"></div>
+          </div>
+        </div>`;
+    }
+
+    function renderResources(filter = "all") {
+      const grid = document.getElementById("resource-grid");
+      const empty = document.getElementById("empty-state");
+      const status = document.getElementById("filter-status");
+      const items = RESEARCH.topResources.filter((r) => filter === "all" || r.filter === filter);
+
+      grid.innerHTML = items.map((r, i) => `
+        <article class="resource-card card-enter glass rounded-2xl p-5 hover:border-neon-cyan/30 transition-colors"
+                 role="listitem"
+                 style="animation-delay:${i * 40}ms"
+                 data-filter="${escapeHtml(r.filter)}">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-wider text-slate-500">${escapeHtml(r.type)}</p>
+              <h3 class="mt-1 font-display text-lg font-bold text-white">
+                <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer" class="hover:text-neon-cyan focus-visible:text-neon-cyan">
+                  ${escapeHtml(r.name)}
+                  <span class="ml-1 inline-block text-xs text-slate-500" aria-hidden="true">↗</span>
+                  <span class="sr-only">(opens in new tab)</span>
+                </a>
+              </h3>
+            </div>
+            <span class="shrink-0 rounded-lg border border-neon-cyan/25 bg-neon-cyan/10 px-2 py-1 font-mono text-xs font-semibold text-neon-cyan">${r.mythicPotential}</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">${escapeHtml(r.why)}</p>
+          ${scoreBar(r.mythicPotential)}
+        </article>
+      `).join("");
+
+      empty.classList.toggle("hidden", items.length > 0);
+      status.textContent = `Showing ${items.length} of ${RESEARCH.topResources.length} resources` +
+        (filter === "all" ? "" : ` filtered by ${filter}`);
+    }
+
+    function renderContradictions() {
+      const root = document.getElementById("contradiction-list");
+      root.innerHTML = RESEARCH.contradictionsDetected.map((c, i) => `
+        <article class="glass rounded-2xl p-5 sm:p-6">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-neon-amber">Signal pair ${String(i + 1).padStart(2, "0")}</div>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-xl border border-white/8 bg-void-50/70 p-3">
+              <div class="font-mono text-[10px] text-slate-500">Signal A</div>
+              <p class="mt-1 text-sm text-slate-200">${escapeHtml(c.signalA)}</p>
+            </div>
+            <div class="rounded-xl border border-white/8 bg-void-50/70 p-3">
+              <div class="font-mono text-[10px] text-slate-500">Signal B</div>
+              <p class="mt-1 text-sm text-slate-200">${escapeHtml(c.signalB)}</p>
+            </div>
+            <div class="rounded-xl border border-neon-lime/25 bg-neon-lime/5 p-3">
+              <div class="font-mono text-[10px] text-neon-lime">Resolution</div>
+              <p class="mt-1 text-sm text-slate-100">${escapeHtml(c.resolution)}</p>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderSkills() {
+      const root = document.getElementById("skill-grid");
+      root.innerHTML = RESEARCH.skillSuggestions.map((s) => `
+        <article class="glass flex h-full flex-col rounded-2xl p-5">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="font-display text-lg font-bold text-white">${escapeHtml(s.title)}</h3>
+            <span class="font-mono text-xs text-neon-lime">${s.mythicPotential}/10</span>
+          </div>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-300">${escapeHtml(s.rationale)}</p>
+          ${scoreBar(s.mythicPotential)}
+          <div class="mt-4 space-y-2 border-t border-white/5 pt-4 text-xs text-slate-400">
+            <p><span class="font-mono text-slate-500">Evolution · </span>${escapeHtml(s.evolutionPath)}</p>
+            <p><span class="font-mono text-slate-500">Invoke · </span>${escapeHtml(s.exampleInvocation)}</p>
+            <p class="font-mono text-[10px] uppercase tracking-wider text-slate-500">
+              Requires · ${s.prerequisites.map(escapeHtml).join(" · ")}
+            </p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderSecondaryStars() {
+      const root = document.getElementById("secondary-stars");
+      const extras = RESEARCH.topResources.slice(1);
+      root.innerHTML = extras.map((r) => `
+        <a href="${escapeHtml(r.url)}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-flex items-center rounded-full border border-white/10 bg-void-50 px-3 py-1 text-xs text-slate-300 hover:border-neon-cyan/40 hover:text-neon-cyan">
+          ${escapeHtml(r.name.split(" ")[0])} ↗
+          <span class="sr-only">Star ${escapeHtml(r.name)} on GitHub (opens in new tab)</span>
+        </a>
+      `).join("");
+    }
+
+    function bindFilters() {
+      const buttons = document.querySelectorAll("[data-filter]");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const value = btn.getAttribute("data-filter");
+          buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+          renderResources(value);
+        });
+      });
+    }
+
+    /* ---------- Waitlist ---------- */
+    function loadWaitlist() {
+      try {
+        return JSON.parse(localStorage.getItem(CONFIG.waitlistKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveWaitlist(list) {
+      localStorage.setItem(CONFIG.waitlistKey, JSON.stringify(list));
+      document.getElementById("waitlist-count").textContent = `${list.length} local signup${list.length === 1 ? "" : "s"}`;
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function bindEarlyAccessForm() {
+      const form = document.getElementById("early-form");
+      const status = document.getElementById("form-status");
+      saveWaitlist(loadWaitlist());
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim().toLowerCase();
+        const stack = form.stack.value;
+        const note = form.note.value.trim();
+
+        if (!name || !isValidEmail(email)) {
+          status.textContent = "Enter a valid name and email.";
+          status.className = "text-sm text-neon-rose";
+          return;
+        }
+
+        const entry = {
+          name,
+          email,
+          stack,
+          note,
+          researchId: RESEARCH.researchId,
+          ts: new Date().toISOString()
+        };
+
+        const list = loadWaitlist();
+        if (list.some((x) => x.email === email)) {
+          status.textContent = "You're already on this device's waitlist.";
+          status.className = "text-sm text-neon-amber";
+        } else {
+          list.push(entry);
+          saveWaitlist(list);
+          status.textContent = "Saved locally. Export JSON or email last signup when ready.";
+          status.className = "text-sm text-neon-lime";
+          form.reset();
+        }
+
+        if (CONFIG.webhookUrl) {
+          try {
+            await fetch(CONFIG.webhookUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(entry)
+            });
+            status.textContent = "Saved + webhook delivered.";
+            status.className = "text-sm text-neon-lime";
+          } catch {
+            status.textContent = "Saved locally. Webhook failed — export JSON or email manually.";
+            status.className = "text-sm text-neon-amber";
+          }
+        }
+      });
+
+      document.getElementById("export-waitlist").addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(loadWaitlist(), null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "aetherweb-waitlist.json";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      document.getElementById("mailto-waitlist").addEventListener("click", () => {
+        const list = loadWaitlist();
+        const last = list[list.length - 1];
+        if (!last) {
+          status.textContent = "Join the waitlist first, then email.";
+          status.className = "text-sm text-neon-amber";
+          return;
+        }
+        const subject = encodeURIComponent("AETHERWEB early access · x402 skill pack");
+        const body = encodeURIComponent(
+          `Name: ${last.name}\nEmail: ${last.email}\nStack: ${last.stack}\nNote: ${last.note || "—"}\nResearch: ${last.researchId}\nTS: ${last.ts}`
+        );
+        window.location.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+      });
+    }
+
+    /* ---------- x402 pay gate ---------- */
+    function buildPaymentRequired() {
+      const exp = Math.floor(Date.now() / 1000) + 3600;
+      return {
+        x402Version: 1,
+        error: "Payment Required",
+        accepts: [
+          {
+            scheme: CONFIG.pay.scheme,
+            network: CONFIG.pay.network,
+            maxAmountRequired: CONFIG.pay.amountAtomic,
+            asset: CONFIG.pay.assetAddress,
+            payTo: CONFIG.pay.payTo,
+            resource: CONFIG.pay.resource,
+            description: CONFIG.pay.description,
+            mimeType: "text/markdown",
+            outputSchema: null,
+            maxTimeoutSeconds: 60,
+            extra: {
+              name: CONFIG.pay.asset,
+              displayAmount: CONFIG.pay.amount,
+              demo: !CONFIG.payEndpoint
+            }
+          }
+        ],
+        expiresAt: exp
+      };
+    }
+
+    function skillPackMarkdown() {
+      const skills = RESEARCH.skillSuggestions;
+      const lines = [
+        `# AETHERWEB Skill Pack`,
+        ``,
+        `Research: ${RESEARCH.researchId} · Mythic ${RESEARCH.mythicScore}`,
+        `Unlocked via x402-Paid-Research-Gate (demo or live).`,
+        ``,
+        `## Thesis (operator summary)`,
+        ``,
+        `Own high-frequency utility (routing, clean data, social/reputation). Expose behind x402/MCP with discovery + metering. Vertical agents commoditize; rails capture durable margin.`,
+        ``,
+        `## Implementation skills`,
+        ``
+      ];
+      skills.forEach((s, i) => {
+        lines.push(`### ${i + 1}. ${s.title} (${s.mythicPotential}/10)`);
+        lines.push(``);
+        lines.push(s.rationale);
+        lines.push(``);
+        lines.push(`- **Evolution:** ${s.evolutionPath}`);
+        lines.push(`- **Prerequisites:** ${s.prerequisites.join(", ")}`);
+        lines.push(`- **Example:** ${s.exampleInvocation}`);
+        lines.push(``);
+      });
+      lines.push(`## x402-Paid-MCP-Gateway — build order`);
+      lines.push(``);
+      lines.push(`1. Stand up one MCP tool with deterministic high utility (e.g. cost-aware model route or clean price feed).`);
+      lines.push(`2. Return HTTP 402 with Payment Required when \`PAYMENT-SIGNATURE\` missing.`);
+      lines.push(`3. Verify via facilitator (or demo receipt), attach receipt metadata to response.`);
+      lines.push(`4. Enforce per-agent budgets; log spend; expose discovery metadata for agent gateways.`);
+      lines.push(`5. Evolve: multi-rail router → reputation registry → marketplace.`);
+      lines.push(``);
+      lines.push(`## Power-law repos`);
+      lines.push(``);
+      RESEARCH.topResources.forEach((r) => {
+        lines.push(`- [${r.name}](${r.url}) — ${r.type} · mythic ${r.mythicPotential}`);
+      });
+      lines.push(``);
+      lines.push(`## Receipt`);
+      lines.push(``);
+      lines.push(`Include settlement id, amount, network, resource URI, and timestamp in every paid response.`);
+      lines.push(``);
+      return lines.join("\n");
+    }
+
+    function renderPackBody() {
+      const md = skillPackMarkdown();
+      // Lightweight markdown → HTML for pack display (headers, lists, bold, code, links)
+      let html = escapeHtml(md)
+        .replace(/^### (.+)$/gm, '<h4 class="font-display text-base font-bold text-white mt-4">$1</h4>')
+        .replace(/^## (.+)$/gm, '<h3 class="font-display text-lg font-bold text-neon-lime mt-6">$1</h3>')
+        .replace(/^# (.+)$/gm, '<h2 class="font-display text-xl font-bold text-white">$1</h2>')
+        .replace(/^\- (.+)$/gm, '<li class="ml-4 list-disc text-slate-300">$1</li>')
+        .replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal text-slate-300">$1</li>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
+        .replace(/`([^`]+)`/g, '<code class="rounded bg-white/10 px-1 font-mono text-[12px] text-neon-cyan">$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="text-neon-cyan underline-offset-2 hover:underline" href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        .replace(/\n\n/g, '</p><p class="text-slate-300">');
+      document.getElementById("pack-body").innerHTML = `<p class="text-slate-300">${html}</p>`;
+    }
+
+    function setUnlocked(receipt) {
+      const content = document.getElementById("pack-content");
+      const badge = document.getElementById("pay-status-badge");
+      content.hidden = false;
+      content.classList.remove("hidden");
+      badge.textContent = "unlocked";
+      badge.className = "ml-auto rounded-full border border-neon-lime/40 bg-neon-lime/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-neon-lime";
+      document.getElementById("pay-msg").textContent = "Payment accepted. Skill pack unlocked on this device.";
+      document.getElementById("pay-msg").className = "mt-3 text-sm text-neon-lime";
+      document.getElementById("receipt-box").textContent = JSON.stringify(receipt, null, 2);
+      renderPackBody();
+      localStorage.setItem(CONFIG.unlockKey, JSON.stringify(receipt));
+    }
+
+    function setLocked() {
+      const content = document.getElementById("pack-content");
+      const badge = document.getElementById("pay-status-badge");
+      content.hidden = true;
+      content.classList.add("hidden");
+      badge.textContent = "locked";
+      badge.className = "ml-auto rounded-full border border-white/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-slate-400";
+      document.getElementById("pay-msg").textContent = CONFIG.payEndpoint
+        ? `Gateway: ${CONFIG.payEndpoint} — settle demo hits paid-mcp mint + route_inference.`
+        : "Demo mode: no gateway URL. Settlement is local-only and educational.";
+      document.getElementById("pay-msg").className = "mt-3 text-sm text-slate-400";
+      localStorage.removeItem(CONFIG.unlockKey);
+    }
+
+    async function hydrateGatewayChallenge() {
+      if (!CONFIG.payEndpoint) return;
+      try {
+        const res = await fetch(CONFIG.payEndpoint, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ task: "oracle probe" })
+        });
+        const hdr = res.headers.get("payment-required") || res.headers.get("PAYMENT-REQUIRED");
+        if (res.status === 402 && hdr) {
+          try {
+            const decoded = JSON.parse(atob(hdr));
+            document.getElementById("payment-required").textContent = JSON.stringify(decoded, null, 2);
+            const acc = decoded.accepts?.[0];
+            if (acc) {
+              if (acc.network) CONFIG.pay.network = acc.network;
+              if (acc.payTo) CONFIG.pay.payTo = acc.payTo;
+              if (acc.asset) CONFIG.pay.assetAddress = acc.asset;
+              if (acc.amount) {
+                CONFIG.pay.amountAtomic = acc.amount;
+                // USDC 6 decimals display
+                const n = Number(acc.amount) / 1e6;
+                if (!Number.isNaN(n)) CONFIG.pay.amount = String(n);
+              }
+              document.getElementById("pack-price").textContent = `${CONFIG.pay.amount} ${CONFIG.pay.asset}`;
+            }
+            document.getElementById("pay-msg").textContent =
+              `Live HTTP 402 from paid-mcp (${CONFIG.payBase}). Ready to settle.`;
+            document.getElementById("pay-msg").className = "mt-3 text-sm text-neon-cyan";
+            return;
+          } catch {
+            document.getElementById("payment-required").textContent = hdr.slice(0, 4000);
+          }
+        }
+      } catch (err) {
+        document.getElementById("pay-msg").textContent =
+          `Gateway unreachable (${CONFIG.payBase}). Start paid-mcp or settle offline.`;
+        document.getElementById("pay-msg").className = "mt-3 text-sm text-neon-amber";
+      }
+    }
+
+    function bindPayGate() {
+      const challenge = buildPaymentRequired();
+      document.getElementById("payment-required").textContent = JSON.stringify(challenge, null, 2);
+      document.getElementById("pack-price").textContent = `${CONFIG.pay.amount} ${CONFIG.pay.asset}`;
+
+      const existing = localStorage.getItem(CONFIG.unlockKey);
+      if (existing) {
+        try {
+          setUnlocked(JSON.parse(existing));
+        } catch {
+          setLocked();
+        }
+      } else {
+        setLocked();
+      }
+      hydrateGatewayChallenge();
+
+      document.getElementById("btn-demo-pay").addEventListener("click", async () => {
+        const msg = document.getElementById("pay-msg");
+        msg.textContent = "Minting demo payment + calling paid-mcp route_inference…";
+        msg.className = "mt-3 text-sm text-neon-amber";
+
+        // Path A: full e2e against paid-mcp (mint → PAYMENT-SIGNATURE → tool)
+        if (CONFIG.payEndpoint && CONFIG.mintEndpoint) {
+          try {
+            const mintRes = await fetch(CONFIG.mintEndpoint, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                payer: "0xdemo00000000000000000000000000000000aeb"
+              })
+            });
+            if (mintRes.ok) {
+              const mint = await mintRes.json();
+              const paidRes = await fetch(CONFIG.payEndpoint, {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  "PAYMENT-SIGNATURE": mint.payment_signature_header,
+                  "x-payment-payer": "0xdemo00000000000000000000000000000000aeb"
+                },
+                body: JSON.stringify({
+                  task: "unlock AETHERWEB skill pack via paid inference router",
+                  agent_id: "aetherweb-oracle",
+                  prefer_latency: "low",
+                  require_tools: true
+                })
+              });
+              const paidBody = await paidRes.json().catch(() => ({}));
+              if (paidRes.ok && paidBody.receipt) {
+                const receipt = {
+                  status: paidBody.receipt.status || "settled",
+                  mode: paidBody.billing?.mode || "demo",
+                  scheme: CONFIG.pay.scheme,
+                  network: paidBody.billing?.network || CONFIG.pay.network,
+                  asset: CONFIG.pay.asset,
+                  amount: paidBody.billing?.price || CONFIG.pay.amount,
+                  resource: CONFIG.payEndpoint,
+                  payTo: paidBody.billing?.payTo || CONFIG.pay.payTo,
+                  settlementId: paidBody.receipt.settlementId || paidBody.receipt.receiptId,
+                  transaction: paidBody.receipt.transaction,
+                  paidAt: paidBody.receipt.paidAt || new Date().toISOString(),
+                  researchId: RESEARCH.researchId,
+                  route: paidBody.selected,
+                  gatewayReceipt: paidBody.receipt
+                };
+                setUnlocked(receipt);
+                msg.textContent = "Settled via paid-mcp. Skill pack unlocked + live receipt attached.";
+                return;
+              }
+              msg.textContent = `Gateway paid call failed (${paidRes.status}). Falling back to offline demo.`;
+            } else if (mintRes.status === 403) {
+              msg.textContent = "Mint disabled (DEMO_MODE=false). Offline skill-pack unlock only.";
+            }
+          } catch {
+            msg.textContent = "Gateway offline — offline skill-pack unlock.";
+          }
+        }
+
+        await new Promise((r) => setTimeout(r, 400));
+        const receipt = {
+          status: "settled",
+          mode: "offline-demo",
+          scheme: CONFIG.pay.scheme,
+          network: CONFIG.pay.network,
+          asset: CONFIG.pay.asset,
+          amount: CONFIG.pay.amount,
+          resource: CONFIG.pay.resource,
+          payTo: CONFIG.pay.payTo,
+          settlementId: `demo_${crypto.randomUUID?.() || Date.now()}`,
+          paidAt: new Date().toISOString(),
+          researchId: RESEARCH.researchId
+        };
+        setUnlocked(receipt);
+      });
+
+      document.getElementById("btn-copy-challenge").addEventListener("click", async () => {
+        const text = document.getElementById("payment-required").textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+          document.getElementById("pay-msg").textContent = "PAYMENT-REQUIRED copied.";
+          document.getElementById("pay-msg").className = "mt-3 text-sm text-neon-cyan";
+        } catch {
+          document.getElementById("pay-msg").textContent = "Copy failed — select the challenge text manually.";
+        }
+      });
+
+      document.getElementById("btn-reset-pay").addEventListener("click", () => {
+        setLocked();
+        document.getElementById("payment-required").textContent = JSON.stringify(buildPaymentRequired(), null, 2);
+        document.getElementById("pay-msg").textContent = "Unlock reset.";
+      });
+
+      document.getElementById("btn-download-pack").addEventListener("click", () => {
+        const blob = new Blob([skillPackMarkdown()], { type: "text/markdown" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "aetherweb-skill-pack.md";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+    }
+
+    /**
+     * Optional live/mock volume hook.
+     * Safe for single-file constraint — no hard dependency.
+     */
+    async function hydrateVolumeMetrics() {
+      const txEl = document.getElementById("metric-txns");
+      const orgEl = document.getElementById("metric-organic");
+      try {
+        const mock = await Promise.resolve({
+          reportedTxns30d: "75M+",
+          organicDailyUsd: "~$28k",
+          source: "research-const"
+        });
+        if (mock.reportedTxns30d) txEl.textContent = mock.reportedTxns30d;
+        if (mock.organicDailyUsd) orgEl.textContent = mock.organicDailyUsd;
+        txEl.title = `Source: ${mock.source}`;
+      } catch {
+        /* keep static markup */
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderResources("all");
+      renderContradictions();
+      renderSkills();
+      renderSecondaryStars();
+      bindFilters();
+      bindEarlyAccessForm();
+      bindPayGate();
+      hydrateVolumeMetrics();
+    });
+  </script>
+</body>
+</html>

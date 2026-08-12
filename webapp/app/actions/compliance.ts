@@ -1,7 +1,7 @@
 'use server';
 
 import { complianceSchema } from '@/lib/compliance/schema';
-import type { ComplianceInput, ComplianceResult } from '@/lib/compliance/types';
+import type { ComplianceResult } from '@/lib/compliance/types';
 import { generateMockResults } from '@/lib/compliance/generate-mock-results';
 
 export async function runComplianceCheck(

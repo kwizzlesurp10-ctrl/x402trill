@@ -1,21 +1,37 @@
-# Only track the app, root docs, and CI. (Repo root is your home directory.)
+# Whitelist monorepo surfaces (repo root may be nested in larger trees)
 /*
 !/.gitignore
 !/README.md
+!/AGENTS.md
 !/.github/
 !/.github/**
-!/mn-compliance-webapp/
-!/mn-compliance-webapp/**
+!/.grok/
+!/.grok/**
+!/webapp/
+!/webapp/**
+!/aetherweb/
+!/aetherweb/**
+!/paid-mcp/
+!/paid-mcp/**
+!/docs/
+!/docs/**
 
 # Next / Node (inside app)
-mn-compliance-webapp/node_modules/
-mn-compliance-webapp/.next/
-mn-compliance-webapp/out/
-mn-compliance-webapp/coverage/
-mn-compliance-webapp/.turbo/
-mn-compliance-webapp/.vercel/
-mn-compliance-webapp/*.tsbuildinfo
+webapp/node_modules/
+webapp/.next/
+webapp/out/
+webapp/coverage/
+webapp/.turbo/
+webapp/.vercel/
+webapp/*.tsbuildinfo
 
 # App env
-mn-compliance-webapp/.env
-mn-compliance-webapp/.env*.local
+webapp/.env
+webapp/.env*.local
+
+# paid-mcp
+paid-mcp/node_modules/
+paid-mcp/dist/
+paid-mcp/data/
+paid-mcp/.env
+paid-mcp/*.tsbuildinfo
