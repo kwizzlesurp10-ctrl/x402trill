@@ -11,21 +11,21 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
-    "lucide-react": "^1.11.0",
+    "@vercel/speed-insights": "^2.1.0",
+    "lucide-react": "^1.70.0",
     "next": "^16.2.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "zod": "^4.3.6"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@testing-library/react": "^16.3.2",
+    "@testing-library/react": "^16.3.3",
     "@types/jsdom": "^28.0.1",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.1",
+    "@vitejs/plugin-react": "^6.2.1",
     "eslint": "^9",
     "eslint-config-next": "^15.5.7",
     "jsdom": "^29.0.2",
