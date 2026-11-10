@@ -1,5 +1,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import {
+  DEFAULT_NETWORK,
+  resolvePayToFromEnv,
+} from "./payment-defaults.js";
 
 /** Best-effort .env loader (no dotenv dependency). */
 function loadDotEnv(path = resolve(process.cwd(), ".env")): void {
@@ -64,18 +68,15 @@ export function loadConfig(): AppConfig {
   const host = process.env.HOST || "127.0.0.1";
   const publicBaseUrl =
     process.env.PUBLIC_BASE_URL || `http://${host}:${port}`;
-  const network = process.env.NETWORK || "eip155:84532";
-  const payToRaw = process.env.PAY_TO || "0x0000000000000000000000000000000000000a01";
-  const payToNormalized = /^0x[a-fA-F0-9]{40}$/.test(payToRaw)
-    ? payToRaw
-    : "0x0000000000000000000000000000000000000a01";
+  const network = process.env.NETWORK || DEFAULT_NETWORK;
+  const payTo = resolvePayToFromEnv();
 
   return {
     port,
     host,
     publicBaseUrl,
     network,
-    payTo: payToNormalized,
+    payTo,
     price: process.env.PRICE || "$0.001",
     facilitatorUrl:
       process.env.FACILITATOR_URL || "https://x402.org/facilitator",

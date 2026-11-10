@@ -7,6 +7,7 @@ import type { PaymentRequirements } from "@x402/core/types";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import type { AppConfig } from "./config.js";
 import { DemoFacilitatorClient } from "./demo-facilitator.js";
+import { usdcAssetForNetwork } from "./payment-defaults.js";
 
 export type GatewayPaymentContext = {
   resourceServer: x402ResourceServer;
@@ -69,7 +70,14 @@ export function amountAtomicFromAccepts(accepts: PaymentRequirements[]): string 
   return a.amount ?? a.maxAmountRequired ?? "1000";
 }
 
-export function assetFromAccepts(accepts: PaymentRequirements[]): string {
+export function assetFromAccepts(
+  accepts: PaymentRequirements[],
+  networkFallback?: string,
+): string {
   const a = accepts[0] as PaymentRequirements & { asset?: string };
-  return a.asset ?? "0x036CbD53842c5426634e7929541eC2318f3dCF7e"; // Base Sepolia USDC default fallback
+  if (a.asset) return a.asset;
+  const network =
+    a.network ??
+    (networkFallback as PaymentRequirements["network"] | undefined);
+  return usdcAssetForNetwork(network ?? "eip155:8453");
 }

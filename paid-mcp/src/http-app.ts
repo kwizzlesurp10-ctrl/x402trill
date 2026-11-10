@@ -67,7 +67,7 @@ export function createHttpApp(opts: {
 }): Express {
   const { config, payment, budgets, receipts } = opts;
   const amountAtomic = amountAtomicFromAccepts(payment.accepts);
-  const asset = assetFromAccepts(payment.accepts);
+  const asset = assetFromAccepts(payment.accepts, config.network);
   const app = express();
   app.use(express.json({ limit: "2mb" }));
 

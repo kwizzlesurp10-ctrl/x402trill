@@ -54,15 +54,17 @@ Docker / production: see [`DEPLOY.md`](./DEPLOY.md).
 AETHERWEB oracle (`aetherweb/index.html`) defaults to `http://127.0.0.1:4021`.
 Override: `?payBase=https://your-host`.
 
-## Live facilitator (Base Sepolia)
+## Live facilitator (Base mainnet)
 
 ```env
 DEMO_MODE=false
-NETWORK=eip155:84532
+NETWORK=eip155:8453
 FACILITATOR_URL=https://x402.org/facilitator
-PAY_TO=0xYourReceivingAddress
+X402_PAY_TO=0x0d25A44f74868eCE53B305C97139CF4B62963410
 PRICE=$0.001
 ```
+
+(`PAY_TO` is an alias for `X402_PAY_TO`. The retired address `0xAB745…4423D` is rejected at startup.)
 
 Clients must sign real x402 exact payments (EIP-3009) and attach them:
 
