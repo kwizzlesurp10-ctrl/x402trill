@@ -69,10 +69,25 @@ export class DemoFacilitatorClient implements FacilitatorClient {
       };
     }
 
-    const auth = payload.payload?.authorization as { from?: string } | undefined;
+    const auth = payload.payload?.authorization as
+      | { from?: string; to?: string }
+      | undefined;
+    const payToReq = paymentRequirements.payTo;
+    if (
+      payToReq &&
+      auth?.to &&
+      auth.to.toLowerCase() !== payToReq.toLowerCase()
+    ) {
+      return {
+        isValid: false,
+        invalidReason: "payto_mismatch",
+        invalidMessage: `authorization.to ${auth.to} != payTo ${payToReq}`,
+      };
+    }
+
+    const authFrom = auth;
     const payer =
-      auth?.from ??
-      "0xdemo000000000000000000000000000000000001";
+      authFrom?.from ?? "0xdemo000000000000000000000000000000000001";
 
     return { isValid: true, payer };
   }

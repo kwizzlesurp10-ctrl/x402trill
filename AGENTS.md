@@ -29,7 +29,7 @@ Paid MCP gateway (Stage 1 reference implementation):
 - Smoke: `cd paid-mcp && npm run smoke`
 - Live wallet client: `PRIVATE_KEY=0x... npm run live:client -- route_inference` (server `DEMO_MODE=false`)
 - Deploy: `paid-mcp/DEPLOY.md`, `docker compose up --build`
-- Live env: `DEMO_MODE=false`, `PAY_TO`, `FACILITATOR_URL`, `NETWORK=eip155:84532`
+- Live env: `DEMO_MODE=false`, `X402_PAY_TO` (or `PAY_TO`), `FACILITATOR_URL`, `NETWORK=eip155:8453`
 - AETHERWEB oracle defaults `payBase` → `http://127.0.0.1:4021` (override `?payBase=`)
 
 Legacy product in-repo (do not conflate with AETHERWEB):

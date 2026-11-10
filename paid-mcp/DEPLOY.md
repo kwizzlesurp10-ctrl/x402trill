@@ -7,9 +7,10 @@ cd paid-mcp
 # Demo (no chain)
 DEMO_MODE=true docker compose up --build
 
-# Live Base Sepolia
+# Live Base mainnet
 export DEMO_MODE=false
-export PAY_TO=0xYourReceivingAddress
+export X402_PAY_TO=0x0d25A44f74868eCE53B305C97139CF4B62963410
+export NETWORK=eip155:8453
 export PUBLIC_BASE_URL=https://paid.example.com
 docker compose up --build -d
 ```
@@ -26,8 +27,8 @@ docker compose --profile oracle up --build
 | Variable | Notes |
 |----------|--------|
 | `DEMO_MODE=false` | Use real facilitator |
-| `PAY_TO` | Your EIP-55 receiving address |
-| `NETWORK` | `eip155:84532` (Sepolia) or `eip155:8453` (Base mainnet when ready) |
+| `X402_PAY_TO` / `PAY_TO` | Receiving wallet (defaults to Keith's Base Account; never use retired `0xAB745…4423D`) |
+| `NETWORK` | `eip155:8453` (Base mainnet default) or `eip155:84532` (Sepolia for testnet) |
 | `FACILITATOR_URL` | `https://x402.org/facilitator` or CDP facilitator |
 | `PUBLIC_BASE_URL` | Public origin for discovery `httpResource` links |
 | `PRICE` | e.g. `$0.001` |
